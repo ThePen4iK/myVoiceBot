@@ -11,18 +11,18 @@ pattern = "*.mp3"
 allMusic = []
 index = 0
 
-MUSIC_END = pygame.USEREVENT + 1
-pygame.mixer.music.set_endevent(MUSIC_END)
-running = True
-while running:
-
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-
-        if event.type == MUSIC_END:
-            print('music end event')
-            pygame.mixer.music.play()
+# MUSIC_END = pygame.USEREVENT + 1
+# pygame.mixer.music.set_endevent(MUSIC_END)
+# running = True
+# while running:
+#
+#     for event in pygame.event.get():
+#         if event.type == pygame.QUIT:
+#             running = False
+#
+#         if event.type == MUSIC_END:
+#             print('music end event')
+#             pygame.mixer.music.play()
 
 for root, dirs, files in os.walk(rootpath):
     for filename in fnmatch.filter(files, pattern):
