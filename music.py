@@ -10,7 +10,7 @@ rootpath = "D:\\University\\assistant\\music"
 pattern = "*.mp3"
 allMusic = []
 index = 0
-
+pause = False
 # MUSIC_END = pygame.USEREVENT + 1
 # pygame.mixer.music.set_endevent(MUSIC_END)
 # running = True
@@ -34,6 +34,7 @@ def play_music():
 
 
 
+
 def next_music():
     global index
     index += 1
@@ -47,12 +48,10 @@ def prev_music():
     pygame.mixer.music.play()
 
 def pause_music():
-    global index
-    pygame.mixer.music.load(allMusic[index])
     pygame.mixer.music.pause()
 
 
 def unpause_music():
-    global index
-    pygame.mixer.music.load(allMusic[index])
+    global pause
     pygame.mixer.music.unpause()
+    pause = False
