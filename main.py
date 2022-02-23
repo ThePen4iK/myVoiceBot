@@ -10,7 +10,11 @@ import music
 ndel = ['сара', 'не могла бы ты']
 
 commands = ['привет', 'пока',
-            'включи музыку', 'следующую', 'включить следующую песню', 'верни назад', 'поставь на паузу', 'возобнови',
+            'включи музыку', 'включить музыку',
+            'следующую', 'включить следующую песню',
+            'верни назад', 'вернуть назад',
+            'поставь на паузу', 'поставить на паузу',
+            'возобнови', 'возобновить'
             ]
 
 r = sr.Recognizer()
@@ -19,6 +23,7 @@ engine = pyttsx3.init()
 text = ''
 j = 0
 num_task = 0
+
 
 
 def talk(speech):
@@ -104,23 +109,6 @@ def music_unpause():
     talk("возобновляю")
     music.unpause_music()
 
-
-# def shut():  # выключает компьютер
-#     global text
-#     talk("Подтвердите действие!")
-#     text = listen()
-#     print(text)
-#     if (fuzz.ratio(text, 'подтвердить') > 60) or (fuzz.ratio(text, "подтверждаю") > 60):
-#         talk('Действие подтверждено')
-#         talk('До скорых встреч!')
-#         system('shutdown /s /f /t 10')
-#         quite()
-#     elif fuzz.ratio(text, 'отмена') > 60:
-#         talk("Действие не подтверждено")
-#     else:
-#         talk("Действие не подтверждено")
-
-
 def hello():
     k = ['Привет, чем могу помочь?']
     talk(random.choice(k))
@@ -135,11 +123,11 @@ def quite():
 
 
 cmds = {
-    'включи музыку': music_play,
-    'следующую': music_next,
-    'верни назад': music_prev,
-    'поставь на паузу': music_pause,
-    'возобнови': music_unpause,
+    'включи музыку': music_play, 'включить музыку': music_play,
+    'следующую': music_next, 'включить следующую песню': music_next,
+    'верни назад': music_prev, 'вернуть назад': music_prev,
+    'поставь на паузу': music_pause, 'поставить на паузу': music_pause,
+    'возобнови': music_unpause, 'возобновить': music_unpause,
     'привет': hello,
     'пока': quite,
 }
