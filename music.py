@@ -23,7 +23,6 @@ def play_music():
     global index
     MUSIC_END = pygame.USEREVENT + 1
     pygame.mixer.music.set_endevent(MUSIC_END)
-
     pygame.mixer.music.load(allMusic[index])
     pygame.mixer.music.play()
 
