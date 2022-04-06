@@ -11,7 +11,7 @@ ndel = ['сара', 'не могла бы ты']
 
 commands = ['привет', 'пока',
             'включи музыку', 'включить музыку',
-            'следующую', 'включить следующую песню','следующая', 'включи следующую песню',
+            'следующую', 'включить следующую песню', 'следующая', 'включи следующую песню',
             'верни назад', 'вернуть назад',
             'поставь на паузу', 'поставить на паузу',
             'включи в случайном порядке', 'включить в случайный порядок', 'включи рандом', 'рандом',
@@ -26,7 +26,6 @@ engine = pyttsx3.init()
 text = ''
 j = 0
 num_task = 0
-
 
 
 def talk(speech):
@@ -75,15 +74,24 @@ def cmd_init():
     text = fuzzy_recognizer(text)
     print(text)
     if text in cmds:
-        if (text != 'пока') & (text != 'привет') & (text != 'который час'):
+        if (text != 'пока') & (text != 'привет') & (text != 'включи музыку') \
+                & (text != 'включить музыку') & (text != 'следующую') \
+                & (text != 'включить следующую песню') & (text != 'следующая') \
+                & (text != 'включи следующую песню') & (text != 'верни назад') & (text != 'вернуть назад') \
+                & (text != 'поставь на паузу') & (text != 'поставить на паузу') & (text != 'возобнови') & (
+                text != 'возобновить') \
+                & (text != 'включи в случайном порядке') & (text != 'включить в случайный порядок') & (
+                text != 'включи рандом') \
+                & (text != 'рандом') & (text != 'в рандомном порядке') & (text != 'повтор') & (
+                text != 'поставь на повтор'):
             k = ['Секундочку', 'Сейчас сделаю', 'Уже выполняю']
             talk(random.choice(k))
         cmds[text]()
     elif text == '':
         print("Команда не распознана")
     num_task += 1
-    if num_task % 10 == 0:
-        talk('У вас будут еще задания?')
+    # if num_task % 10 == 0:
+    #     talk('У вас будут еще задания?')
     engine.runAndWait()
     engine.stop()
 
@@ -91,36 +99,44 @@ def cmd_init():
 def music_play():
     talk("Включаю")
     music.play_music()
+    system('cls')
 
 
 def music_next():
     x = ['Переключаю', 'Секундочку', 'Щяс сделаю']
     music.next_music()
+    system('cls')
 
 
 def music_prev():
     x = ['Переключаю', 'Секундочку', 'Щяс сделаю']
     talk(random.choice(x))
     music.prev_music()
+    system('cls')
 
 
 def music_pause():
     talk("Останавливаю")
     music.pause_music()
+    system('cls')
 
 
 def music_unpause():
     talk("возобновляю")
     music.unpause_music()
+    system('cls')
+
 
 def music_random():
     music.random_music()
+    system('cls')
 
 
 def music_repeat():
     x = ['Выполняю', 'Секундочку', 'Щяс сделаю']
     talk(random.choice(x))
     music.repeat_music()
+    system('cls')
 
 
 def hello():
@@ -148,9 +164,8 @@ cmds = {
 
     'возобнови': music_unpause, 'возобновить': music_unpause,
 
-    'включи в случайном порядке':music_random, 'включить в случайный порядок': music_random,
+    'включи в случайном порядке': music_random, 'включить в случайный порядок': music_random,
     'включи рандом': music_random, 'рандом': music_random, 'в рандомном порядке': music_random,
-
 
     'повтор': music_repeat, 'поставь на повтор': music_repeat,
 
