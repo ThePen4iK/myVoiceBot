@@ -13,27 +13,38 @@ allMusic = []
 index = 0
 pause = False
 running = True
+MUSIC_ENDED = pygame.USEREVENT + 1
+
+
+def test():
+    global index
 
 
 for root, dirs, files in os.walk(rootpath):
     for filename in fnmatch.filter(files, pattern):
         allMusic.append("music/" + str(filename))
 
+
 def play_music():
-    # global running
+    global running
     global index
-    # MUSIC_END = pygame.USEREVENT + 1
-    # pygame.mixer.music.set_endevent(MUSIC_END)
+    MUSIC_END = pygame.USEREVENT + 1
+    pygame.mixer.music.set_endevent(MUSIC_END)
     pygame.mixer.music.load(allMusic[index])
     pygame.mixer.music.play()
 
-    # running = True
-    # while running:
-    #     for event in pygame.event.get():
-    #         if event.type == MUSIC_END:
-    #             index += 1
-    #             pygame.mixer.music.load(allMusic[index])
-    #             pygame.mixer.music.play()
+    for event in pygame.event.get():
+        if event.type == music.MUSIC_END:
+            index += 1
+            pygame.mixer.music.load(allMusic[index])
+            pygame.mixer.music.play()
+# running = True
+# while running:
+#     for event in pygame.event.get():
+#         if event.type == MUSIC_END:
+#             index += 1
+#             pygame.mixer.music.load(allMusic[index])
+#             pygame.mixer.music.play()
 
 def next_music():
     global index
@@ -41,11 +52,13 @@ def next_music():
     pygame.mixer.music.load(allMusic[index])
     pygame.mixer.music.play()
 
+
 def prev_music():
     global index
     index = index - 1
     pygame.mixer.music.load(allMusic[index])
     pygame.mixer.music.play()
+
 
 def pause_music():
     pygame.mixer.music.pause()
@@ -56,6 +69,7 @@ def unpause_music():
     pygame.mixer.music.unpause()
     pause = False
 
+
 def random_music():
     global index
     randomMusic = random.choice(allMusic)
@@ -65,8 +79,6 @@ def random_music():
     #     index += 1
     #     pygame.mixer.music.load(allMusic[index])
     #     pygame.mixer.music.play()
-
-
 
 
 def repeat_music():
