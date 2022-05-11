@@ -6,6 +6,7 @@ import sys
 import pygame
 from os import system
 import music
+import threading
 
 ndel = ['сара', 'не могла бы ты']
 
@@ -64,7 +65,7 @@ def listen():
         except sr.UnknownValueError:
             pass
         # print(text)
-        system('cls')
+        # system('cls')
         clear_task()
         return text
 
@@ -99,44 +100,44 @@ def cmd_init():
 def music_play():
     talk("Включаю")
     music.play_music()
-    system('cls')
+    # system('cls')
 
 
 def music_next():
     x = ['Переключаю', 'Секундочку', 'Щяс сделаю']
     music.next_music()
-    system('cls')
+    # system('cls')
 
 
 def music_prev():
     x = ['Переключаю', 'Секундочку', 'Щяс сделаю']
     talk(random.choice(x))
     music.prev_music()
-    system('cls')
+    # system('cls')
 
 
 def music_pause():
     talk("Останавливаю")
     music.pause_music()
-    system('cls')
+    # system('cls')
 
 
 def music_unpause():
     talk("возобновляю")
     music.unpause_music()
-    system('cls')
+    # system('cls')
 
 
 def music_random():
     music.random_music()
-    system('cls')
+    # system('cls')
 
 
 def music_repeat():
     x = ['Выполняю', 'Секундочку', 'Щяс сделаю']
     talk(random.choice(x))
     music.repeat_music()
-    system('cls')
+    # system('cls')
 
 
 def hello():
@@ -148,7 +149,7 @@ def quite():
     x = ['Надеюсь мы скоро увидимся!', 'Рада была помочь']
     talk(random.choice(x))
     engine.stop()
-    system('cls')
+    # system('cls')
     sys.exit(0)
 
 
@@ -174,7 +175,7 @@ cmds = {
 }
 
 talk('Привет, я Сара, чем могу помочь?')
-system('cls')
+# system('cls')
 
 
 def main():

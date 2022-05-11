@@ -3,7 +3,7 @@ import os
 import pygame
 import random
 from pygame import mixer
-
+import threading
 from os import system
 
 mixer.init()
@@ -13,11 +13,7 @@ allMusic = []
 index = 0
 pause = False
 running = True
-MUSIC_ENDED = pygame.USEREVENT + 1
 
-
-def test():
-    global index
 
 
 for root, dirs, files in os.walk(rootpath):
@@ -25,26 +21,36 @@ for root, dirs, files in os.walk(rootpath):
         allMusic.append("music/" + str(filename))
 
 
-def play_music():
-    global running
+def check__music():
     global index
+    global running
+
     MUSIC_END = pygame.USEREVENT + 1
     pygame.mixer.music.set_endevent(MUSIC_END)
+    running = True
+    while running:
+        for event in pygame.event.get():
+            if event.type == MUSIC_END:
+                print("music play")
+                index += 1
+                pygame.mixer.music.load(allMusic[index])
+                pygame.mixer.music.play()
+
+
+def play_music():
+    global index
+
     pygame.mixer.music.load(allMusic[index])
     pygame.mixer.music.play()
+    my_thread = threading.Thread(target=check__music, args=(), daemon=True)
+    my_thread.start()
 
-    for event in pygame.event.get():
-        if event.type == music.MUSIC_END:
-            index += 1
-            pygame.mixer.music.load(allMusic[index])
-            pygame.mixer.music.play()
-# running = True
-# while running:
-#     for event in pygame.event.get():
-#         if event.type == MUSIC_END:
-#             index += 1
-#             pygame.mixer.music.load(allMusic[index])
-#             pygame.mixer.music.play()
+        # for event in pygame.event.get():
+        #     if event.type == MUSIC_END:
+
+                # index += 1
+                # pygame.mixer.music.load(allMusic[index])
+                # pygame.mixer.music.play()
 
 def next_music():
     global index
